@@ -2,7 +2,7 @@
   "name": "claude-config",
   "displayName": "Claude Config",
   "description": "Switch the active directory in Claude Desktop config",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "engines": {
     "vscode": "^1.75.0"
   },
