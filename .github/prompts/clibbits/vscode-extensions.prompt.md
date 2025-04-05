@@ -4,6 +4,18 @@
 Instructions for how to use this prompt file.
 
 ## Context
+```json
+// From package.json
+"publisher": "codeontherocks",
+  "icon": "clibbits.png",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jtmuller5/clibbits"
+  },
+  "categories": [
+    "Other"
+  ],
+```
 ### .vscode/tasks.json
 
 ```json
