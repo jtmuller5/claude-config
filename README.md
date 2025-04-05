@@ -1,6 +1,9 @@
 # Claude Config Switcher
 
-A simple VS Code extension that switches the active directory in your Claude Desktop configuration to point to the current VS Code project.
+A simple VS Code extension that switches the active directory in your Claude Desktop Filesystem MCP configuration to point to the current VS Code project.
+
+> [!IMPORTANT]
+> [Get started with the Filesystem MCP server here](https://modelcontextprotocol.info/docs/quickstart/user/)
 
 ## Features
 
