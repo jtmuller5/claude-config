@@ -9,7 +9,7 @@ function activate(context) {
   console.log('Claude Config Switcher extension is now active');
 
   let disposable = vscode.commands.registerCommand(
-    'claude-config-switcher.switchActiveDirectory',
+    'claude-config.switchActiveDirectory',
     async function () {
       // Check if a workspace folder is open
       if (!vscode.workspace.workspaceFolders || vscode.workspace.workspaceFolders.length === 0) {

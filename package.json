@@ -1,10 +1,14 @@
 {
-  "name": "claude-config-switcher",
-  "displayName": "Claude Config Switcher",
+  "name": "claude-config",
+  "displayName": "Claude Config",
   "description": "Switch the active directory in Claude Desktop config",
   "version": "0.0.1",
   "engines": {
     "vscode": "^1.75.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jtmuller5/claude-config"
   },
   "categories": [
     "Other"
@@ -14,7 +18,7 @@
   "contributes": {
     "commands": [
       {
-        "command": "claude-config-switcher.switchActiveDirectory",
+        "command": "claude-config.switchActiveDirectory",
         "title": "Claude: Switch Active Directory to Current Project"
       }
     ]

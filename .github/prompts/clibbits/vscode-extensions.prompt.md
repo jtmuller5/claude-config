@@ -1,0 +1,79 @@
+# vscode-extensions
+
+## Instructions
+Instructions for how to use this prompt file.
+
+## Context
+### .vscode/tasks.json
+
+```json
+{
+    "version": "2.0.0",
+    "tasks": [
+      {
+        "label": "Package Extension",
+        "type": "shell",
+        "command": "vsce",
+        "args": ["package"],
+        "group": {
+          "kind": "build",
+          "isDefault": false
+        },
+        "problemMatcher": ["$tsc"]
+      },
+      {
+        "label": "Publish Package",
+        "type": "shell",
+        "command": "vsce",
+        "args": ["publish", "${input:versionType}"],
+        "group": {
+          "kind": "build",
+          "isDefault": false
+        },
+        "problemMatcher": ["$tsc"]
+      },
+      {
+        "label": "Show Package Stats",
+        "type": "shell",
+        "command": "vsce",
+        "args": ["show", "CodeontheRocks.clibbits"],
+        "group": {
+          "kind": "build",
+          "isDefault": false
+        },
+        "problemMatcher": ["$tsc"]
+      },
+      {
+        "type": "npm",
+        "script": "watch",
+        "problemMatcher": "$tsc-watch",
+        "isBackground": true,
+        "presentation": {
+          "reveal": "never"
+        },
+        "group": {
+          "kind": "build",
+          "isDefault": true
+        }
+      }
+    ],
+    "inputs": [
+      {
+        "id": "versionType",
+        "type": "pickString",
+        "options": ["major", "minor", "patch"],
+        "default": "minor",
+        "description": "Select the version type to publish"
+      }
+    ]
+  }
+  
+```
+
+
+```
+// Code snippets will be added here
+```
+
+## Files
+
