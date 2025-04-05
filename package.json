@@ -1,0 +1,33 @@
+{
+  "name": "claude-config-switcher",
+  "displayName": "Claude Config Switcher",
+  "description": "Switch the active directory in Claude Desktop config",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.75.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [],
+  "main": "./extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "claude-config-switcher.switchActiveDirectory",
+        "title": "Claude: Switch Active Directory to Current Project"
+      }
+    ]
+  },
+  "scripts": {
+    "lint": "eslint .",
+    "package": "vsce package",
+    "publish": "vsce publish"
+  },
+  "devDependencies": {
+    "@types/node": "^16.11.7",
+    "@types/vscode": "^1.75.0",
+    "eslint": "^8.33.0",
+    "vsce": "^2.15.0"
+  }
+}
