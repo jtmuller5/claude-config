@@ -1,7 +1,7 @@
 {
   "name": "claude-config",
   "displayName": "Claude Config",
-  "description": "Manage Claude Desktop configurations and switch active directories",
+  "description": "Manage Claude Desktop configurations, switch active directories, and auto-restart Claude when configs change",
   "version": "2.0.0",
   "engines": {
     "vscode": "^1.75.0"
@@ -18,6 +18,21 @@
   "activationEvents": [],
   "main": "./out/extension.js",
   "contributes": {
+    "configuration": {
+      "title": "Claude Config",
+      "properties": {
+        "claude-config.autoRestartAfterConfigChange": {
+          "type": "boolean",
+          "default": true,
+          "description": "Automatically restart Claude Desktop app when configuration changes"
+        },
+        "claude-config.restartDelay": {
+          "type": "number",
+          "default": 2,
+          "description": "Delay in seconds before restarting Claude after shutdown"
+        }
+      }
+    },
     "commands": [
       {
         "command": "claude-config.switchActiveDirectory",
@@ -38,6 +53,10 @@
       {
         "command": "claude-config.editConfig",
         "title": "Claude: View/Edit Configuration"
+      },
+      {
+        "command": "claude-config.restartClaude",
+        "title": "Claude: Restart Desktop App"
       }
     ]
   },

@@ -2,6 +2,7 @@ import * as vscode from 'vscode';
 import * as fs from 'fs';
 import * as path from 'path';
 import * as os from 'os';
+import { ClaudeService } from './claudeService';
 
 export interface ConfigItem {
     name: string;
@@ -34,16 +35,7 @@ export class ConfigService {
      * Get the path to the Claude desktop config file based on the OS
      */
     public getClaudeConfigPath(): string {
-        if (process.platform === 'darwin') {
-            // macOS
-            return path.join(os.homedir(), 'Library/Application Support/Claude/claude_desktop_config.json');
-        } else if (process.platform === 'win32') {
-            // Windows
-            return path.join(process.env.APPDATA || '', 'Claude', 'claude_desktop_config.json');
-        } else {
-            // Not supported
-            throw new Error('Unsupported platform');
-        }
+        return ClaudeService.getClaudeConfigPath();
     }
 
     /**
@@ -143,6 +135,13 @@ export class ConfigService {
         try {
             fs.writeFileSync(claudeConfigPath, JSON.stringify(config.content, null, 2), 'utf8');
             await this.extensionContext.globalState.update(this.activeConfigKey, name);
+            
+            // Auto-restart Claude if enabled
+            const autoRestart = vscode.workspace.getConfiguration('claude-config').get<boolean>('autoRestartAfterConfigChange', true);
+            if (autoRestart) {
+                vscode.window.showInformationMessage('Claude config updated, restarting Claude...');
+                await ClaudeService.restartClaude();
+            }
         } catch (error) {
             throw new Error(`Failed to update Claude config file: ${error instanceof Error ? error.message : String(error)}`);
         }

@@ -2,13 +2,29 @@ import * as vscode from 'vscode';
 import * as fs from 'fs';
 import * as path from 'path';
 import { ConfigService } from './services/configService';
+import { ClaudeService } from './services/claudeService';
 import { createConfig } from './commands/createConfig';
 import { selectConfig } from './commands/selectConfig';
 import { deleteConfig } from './commands/deleteConfig';
 import { editConfig } from './commands/editConfig';
+import { restartClaude } from './commands/restartClaude';
 
 export function activate(context: vscode.ExtensionContext): void {
   console.log('Claude Config Switcher extension is now active');
+
+  // Set up a file watcher for the Claude config file
+  ClaudeService.setupConfigFileWatcher(context);
+  
+  // Register configuration settings
+  vscode.workspace.getConfiguration('claude-config').update('autoRestartAfterConfigChange', 
+    vscode.workspace.getConfiguration('claude-config').get('autoRestartAfterConfigChange', true), 
+    vscode.ConfigurationTarget.Global
+  );
+  
+  vscode.workspace.getConfiguration('claude-config').update('restartDelay', 
+    vscode.workspace.getConfiguration('claude-config').get('restartDelay', 2), 
+    vscode.ConfigurationTarget.Global
+  );
 
   // Initialize the configuration service
   const configService = new ConfigService(context);
@@ -68,6 +84,13 @@ export function activate(context: vscode.ExtensionContext): void {
         vscode.window.showInformationMessage(
           `Successfully switched Claude's active directory to:\n${workspaceRoot}`
         );
+        
+        // Auto restart Claude after config change if enabled
+        const autoRestart = vscode.workspace.getConfiguration('claude-config').get<boolean>('autoRestartAfterConfigChange', true);
+        if (autoRestart) {
+          vscode.window.showInformationMessage('Restarting Claude to apply changes...');
+          await ClaudeService.restartClaude();
+        }
 
         // If we have an active config in our extension, update it
         const activeConfigName = configService.getActiveConfigName();
@@ -100,6 +123,12 @@ export function activate(context: vscode.ExtensionContext): void {
     'claude-config.editConfig',
     () => editConfig(configService)
   );
+  
+  // Register the command to manually restart Claude
+  const restartClaudeCommand = vscode.commands.registerCommand(
+    'claude-config.restartClaude',
+    () => restartClaude()
+  );
 
   // Add all commands to subscriptions
   context.subscriptions.push(
@@ -107,7 +136,8 @@ export function activate(context: vscode.ExtensionContext): void {
     createConfigCommand,
     selectConfigCommand,
     deleteConfigCommand,
-    editConfigCommand
+    editConfigCommand,
+    restartClaudeCommand
   );
 }
 
