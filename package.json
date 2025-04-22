@@ -1,8 +1,8 @@
 {
   "name": "claude-config",
   "displayName": "Claude Config",
-  "description": "Switch the active directory in Claude Desktop config",
-  "version": "1.2.0",
+  "description": "Manage Claude Desktop configurations and switch active directories",
+  "version": "1.3.0",
   "engines": {
     "vscode": "^1.75.0"
   },
@@ -16,24 +16,46 @@
     "Other"
   ],
   "activationEvents": [],
-  "main": "./extension.js",
+  "main": "./out/extension.js",
   "contributes": {
     "commands": [
       {
         "command": "claude-config.switchActiveDirectory",
         "title": "Claude: Switch Active Directory to Current Project"
+      },
+      {
+        "command": "claude-config.createConfig",
+        "title": "Claude: Create New Configuration"
+      },
+      {
+        "command": "claude-config.selectConfig",
+        "title": "Claude: Select Active Configuration"
+      },
+      {
+        "command": "claude-config.deleteConfig",
+        "title": "Claude: Delete Configuration"
+      },
+      {
+        "command": "claude-config.editConfig",
+        "title": "Claude: View/Edit Configuration"
       }
     ]
   },
   "scripts": {
-    "lint": "eslint .",
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "lint": "eslint src --ext ts",
     "package": "vsce package",
     "publish": "vsce publish"
   },
   "devDependencies": {
     "@types/node": "^16.11.7",
     "@types/vscode": "^1.75.0",
+    "@typescript-eslint/eslint-plugin": "^5.42.0",
+    "@typescript-eslint/parser": "^5.42.0",
     "eslint": "^8.33.0",
+    "typescript": "^4.9.5",
     "vsce": "^2.15.0"
   }
 }
