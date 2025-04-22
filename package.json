@@ -2,7 +2,7 @@
   "name": "claude-config",
   "displayName": "Claude Config",
   "description": "Manage Claude Desktop configurations, switch active directories, and auto-restart Claude when configs change",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "engines": {
     "vscode": "^1.75.0"
   },
