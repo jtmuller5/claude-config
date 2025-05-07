@@ -18,17 +18,8 @@ A VS Code extension that helps you manage Claude Desktop configurations, easily 
 
 ### Switching Active Directory
 
-#### Switch to Current Project
-
 1. Open a project folder in VS Code
 2. Run the command: `Claude: Switch Active Directory to Current Project` (from Command Palette - Ctrl+Shift+P or Cmd+Shift+P)
-3. Confirm the change when prompted
-4. Claude Desktop will automatically restart if auto-restart is enabled (default)
-
-#### Switch to a Specific Folder
-
-1. Right-click on any folder in the Explorer view
-2. Select `Claude: Switch Active Directory to This Folder` from the context menu
 3. Confirm the change when prompted
 4. Claude Desktop will automatically restart if auto-restart is enabled (default)
 
