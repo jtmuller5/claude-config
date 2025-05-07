@@ -33,6 +33,15 @@
         }
       }
     },
+    "menus": {
+      "explorer/context": [
+        {
+          "when": "explorerResourceIsFolder",
+          "command": "claude-config.switchToSelectedFolder",
+          "group": "7_modification"
+        }
+      ]
+    },
     "commands": [
       {
         "command": "claude-config.switchActiveDirectory",
@@ -57,6 +66,10 @@
       {
         "command": "claude-config.restartClaude",
         "title": "Claude: Restart Desktop App"
+      },
+      {
+        "command": "claude-config.switchToSelectedFolder",
+        "title": "Claude: Switch Active Directory to This Folder"
       }
     ]
   },
